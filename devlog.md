@@ -53,3 +53,9 @@ I first read through the project requirements, from which I understood that:
 - went back and added proper checking to make sure that only index files would be accepted
 - tested file with three case: proper index file, opening file which doesn't exist, and opening file which is not an index file
     - program properly handled all cases! 
+- committed the new open code, and committed to github!
+
+### 5: 11/26 2:10 PM
+- for the insert function, had to add a new from_bytes method in the header class, as well as a node class to be able to actually add the key and value pairs
+- created insert, insert into tree, and insert into leaf methods
+    - 
