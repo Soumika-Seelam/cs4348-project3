@@ -56,11 +56,18 @@ I first read through the project requirements, from which I understood that:
 - committed the new open code, and committed to github!
 
 ### 5: 11/26 2:10 PM
-- for the insert function, had to add a new from_bytes method in the header class, as well as a node class to be able to actually add the key and value pairs
 - created insert, insert into tree, and insert into leaf methods
+    - had to also create a from_bytes method in the header class to process the bytes
+    - also had to add a separate node class so we can insert nodes of the key and value pairs
     - tested with creating key value pair 10, 100
     - then made sure we could add another one 20, 200
     - then made sure it would detect if a duplicate one was being made
         - all test cases passed!
 
 ### 6: 11/26 2:26 PM
+- now working on node-splitting: when a node is more than the accepted limit during insertion, have to split the node
+    - middle key becomes parent key
+    - the key and values that are left become child nodes
+    - if the parent node is also full, then the splitting has to be propogated up the tree
+    - running into some errors, node is not splitting even though the key limit is being reached
+    - debugging with print statements
