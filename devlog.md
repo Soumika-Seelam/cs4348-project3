@@ -42,6 +42,7 @@ I first read through the project requirements, from which I understood that:
     - if you make a file with the same name again, will ask if you want to abort
         - if you say yes, it will replace the file with the new one
         - if you say no, it will abort
-    - 
+- saw that local repository was not properly connected with github repository, fixed connection
 
 
+hellooooo, github testing
