@@ -32,9 +32,9 @@ class Node:
         self.block_id = block_id
         self.parent_id = 0
         self.key_count = 0
-        self.keys = [0] * (2 * 10 - 1)      # creating a placeholder for keys
-        self.values = [0] * (2 * 10 - 1)    # creating a placeholder for values
-        self.children = [0] * (2 * 10)      # creating a placeholder for the child pointers
+        self.keys = [0]*(2*10-1)
+        self.values = [0]*(2*10-1)
+        self.children = [0]*(2*10)
 
     def to_bytes(self):
         # here we serialize the Node to a binary format
@@ -82,13 +82,13 @@ def create_index(file_name):
 def open_index(file_name):
     # checks whether that file actually exists
     if not os.path.exists(file_name):
-        print(f"Error: File '{file_name}' does not exist.")
+        print(f"Error: File '{file_name}' doesn't exist!")
         return None
 
     with open(file_name, "rb") as file:
-        header_data = file.read(512)  # reads the first 512 bytes
+        header_data = file.read(512)
 
-        # then checks to see if the file has at least 512 bytes
+        # then we check to see if the file has at least (the needed) 512 bytes
         if len(header_data) < 512:
             print(f"Error: File '{file_name}' is too small to be a valid index file.")
             return None
@@ -181,10 +181,10 @@ def main():
 
         # if loop that decides command
         if command == "create":
-            file_name = input("Enter file name: ")
+            file_name = input("Enter name of the new file: ")
             create_index(file_name)
         elif command == "open":
-            file_name = input("Enter file name: ")
+            file_name = input("Enter file of file you'd like to open: ")
             current_file = open_index(file_name)
         elif command == "insert":
             if not current_file:
