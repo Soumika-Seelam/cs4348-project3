@@ -140,6 +140,7 @@ def read_block(file, block_id):
     return file.read(512)
 
 # inserts the node into the tree
+# insert_into_tree: added debug statement for split condition
 def insert_into_tree(file, header, block_id, key, value):
     node_data = read_block(file, block_id)
     node = Node.from_bytes(node_data)
@@ -149,7 +150,7 @@ def insert_into_tree(file, header, block_id, key, value):
     if key in node.keys[:node.key_count]:
         print(f"Error: Key {key} already exists.")
         return
-    
+
     if node.children[0] == 0:
         # insert into the leaf node
         insert_into_leaf(node, key, value)
@@ -160,11 +161,12 @@ def insert_into_tree(file, header, block_id, key, value):
         print(f"Header next_block: {header.next_block}")
         print(f"Node block_id: {node.block_id}")
 
-
         # then we check if the node needs splitting
+        print(f"Checking split condition for node {node.block_id}: key_count={node.key_count}, max_keys={2 * 10 - 1}")
         if node.key_count == 2 * 10 - 1:
             print(f"Triggering split for node {node.block_id}")
             split_node(file, header, None, node)  # Assuming no parent for now
+
     else:
         # then we move to the correct child
         child_index = find_child_index(node, key)
@@ -176,9 +178,10 @@ def insert_into_tree(file, header, block_id, key, value):
         if child_node.key_count == 2 * 10 - 1:
             split_node(file, header, node, child_node)
 
+
 def split_node(file, header, parent, node):
     # this the minimum degree for when we know when to split
-    MIN_DEGREE = 10
+    MIN_DEGREE = 3
 
     # this code finds the middle index
     mid_index = MIN_DEGREE - 1
@@ -257,6 +260,7 @@ def insert_into_leaf(node, key, value):
     node.values[index] = value
 
     node.key_count += 1
+    print(f"Updated key_count for node {node.block_id}: {node.key_count}")
 
 def find_child_index(node, key):
     # we then find the correct child pointer for the key
