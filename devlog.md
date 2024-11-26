@@ -43,6 +43,13 @@ I first read through the project requirements, from which I understood that:
         - if you say yes, it will replace the file with the new one
         - if you say no, it will abort
 - saw that local repository was not properly connected with github repository, fixed connection
+- connected properly now!
 
-
-hellooooo, github testing more testing
+### 4: 11/26 1:35 PM
+- created the open function which checks whether a file is valid
+- didn't add proper checking, python file passed as well (so added header data check for 8 bytes)
+- python file still passed, so made it so that it had to have at least 512 bytes
+- also added condition so that it will ask when you try to make non idx files if you want to proceed anyways
+- went back and added proper checking to make sure that only index files would be accepted
+- tested file with three case: proper index file, opening file which doesn't exist, and opening file which is not an index file
+    - program properly handled all cases! 
