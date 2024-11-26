@@ -29,4 +29,19 @@ I first read through the project requirements, from which I understood that:
 - i created both files devlog.md and btree_manager.py
 - first commit with files
 - created main function to test whether project was working or not
+- connected local repository to github
 - test successful
+
+### 3: 11/25 8:35 PM
+
+- importing os and struct library
+- created the header class which decides the structure
+- create the create function
+    - will allow the users to create a file with the chosen file name
+    - with xxd can check what the binary contents of the file look like
+    - if you make a file with the same name again, will ask if you want to abort
+        - if you say yes, it will replace the file with the new one
+        - if you say no, it will abort
+    - 
+
+
