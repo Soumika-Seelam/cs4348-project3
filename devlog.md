@@ -71,3 +71,19 @@ I first read through the project requirements, from which I understood that:
     - if the parent node is also full, then the splitting has to be propogated up the tree
     - running into some errors, node is not splitting even though the key limit is being reached
     - debugging with print statements
+    - figured out the issue is that the count is not increasing. fixed the issue, now splitting is worked!
+    - tested with all test cases, all passed!
+
+### 7: 11/27 10:09 AM
+- started working on the search function which finds a node in the tree
+    - first have to read the different blocks and then deserialize
+    - check if the current key is in the node we're at
+    - then we have to figure out which child to search
+    - if this key is bigger than all the other keys of this node, then you have to go to the last place
+
+### 7: 11/27 10:09 AM
+- continued work on search function
+- now I just connect this functionality to the main function
+- tested the function with multiple key, value pairs, works successfully!
+- committed and pushed all changes to github
+

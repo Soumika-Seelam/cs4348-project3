@@ -269,6 +269,28 @@ def find_child_index(node, key):
             return i
     return node.key_count
 
+# search tree function which finds the location of a key in a tree 
+def search_tree(file, block_id, key):
+    if block_id == 0:
+        return None
+
+    # here we first have to read the block and then deserialize the node
+    node_data = read_block(file, block_id)
+    node = Node.from_bytes(node_data)
+
+    # then we need to check if the key is in the current node
+    for i in range(node.key_count):
+        if node.keys[i] == key:
+            return node.values[i]  # Return the corresponding value
+
+    # then we have to figure out which child to search
+    for i in range(node.key_count):
+        if key < node.keys[i]:
+            return search_tree(file, node.children[i], key)
+
+    # if this key is bigger than all the other keys of this node, then you have to go to the last place
+    return search_tree(file, node.children[node.key_count], key)
+
 # defining the main function
 def main():
     current_file = None
@@ -291,6 +313,17 @@ def main():
             key = int(input("Enter key (unsigned integer): "))
             value = int(input("Enter value (unsigned integer): "))
             insert(current_file, key, value)
+        elif command == "search":
+            if not current_file:
+                print("Error: No file is currently open.")
+                continue
+            key = int(input("Enter key (which should be an unsigned integer) to search for: "))
+            with open(current_file, "rb") as file:
+                value = search_tree(file, Header.from_bytes(file.read(512)).root_block, key)
+            if value is None:
+                print(f"Key {key} not found.")
+            else:
+                print(f"Key {key} found with value {value}.")
         elif command == "quit":
             break
         else:
